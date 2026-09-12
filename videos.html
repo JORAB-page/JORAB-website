@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Videos</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-light: #ffffff;
+            --text-sub: #94a3b8;
+            --orange: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.15);
+            /* 92% TRANSPARENCY (8% OPACITY) GLASS BACKGROUND */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --card-solid: #130f26;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: 080612;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+       url('/storage/emulated/0/JORAB html file/image 7.png') center top / cover fixed no-repeat;
+        }
+
+        /* TOP GRADIENT OVERLAY */
+        .top-gradient-wrapper {
+            position: relative;
+            z-index: 30;
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.85) 80%, rgba(0, 0, 0, 0) 100%);
+            padding-bottom: 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: var(--orange);
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* NAVIGATION TABS */
+        nav {
+            background: rgba(8, 6, 18, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            scrollbar-width: none;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 1.4rem;
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        nav a.active {
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            padding: 1.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .page-title span {
+            color: var(--orange);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .category-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .more-link {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        /* GLASS FRAME CONTAINER (92% TRANSPARENT = 8% OPACITY) */
+        .glass-frame {
+            position: relative;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1rem 0.4rem 0.6rem 0.4rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ARROW BUTTONS */
+        .arrow-btn {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--orange);
+            color: var(--orange);
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: 900;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 25;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            user-select: none;
+        }
+
+        .arrow-left { left: -8px; }
+        .arrow-right { right: -8px; }
+
+        /* HORIZONTAL SCROLL RAIL */
+        .video-rail {
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0.2rem 1.2rem;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .video-rail::-webkit-scrollbar { display: none; }
+
+        /* VIDEO CARDS */
+        .video-card {
+            width: 200px;
+            min-width: 200px;
+            flex-shrink: 0;
+            background: var(--card-solid);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* SHORTS CARD SIZING (PORTRAIT) */
+        .shorts-rail .video-card {
+            width: 140px;
+            min-width: 140px;
+        }
+
+        .shorts-rail .thumb-box {
+            height: 200px;
+        }
+
+        .thumb-box {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .thumb-box img, .thumb-box video, .thumb-box iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            display: block;
+        }
+
+        .type-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--orange);
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .video-content {
+            padding: 0.7rem;
+        }
+
+        .video-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--text-light);
+            min-height: 2.2rem;
+        }
+
+        .video-btn-group {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.5rem 0.2rem;
+            border-radius: 6px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-watch {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--orange);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-download {
+            background: var(--orange);
+            color: #000;
+        }
+
+        .frame-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0.4rem 0.8rem 0 0;
+        }
+
+        /* DESKTOP CONSTRAINT */
+        @media screen and (min-width: 768px), screen and (orientation: landscape) {
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #040308;
+            }
+
+            .top-gradient-wrapper, .container {
+                width: 40%;
+                min-width: 360px;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP GRADIENT OVERLAY -->
+    <div class="top-gradient-wrapper">
+        <header>
+            <div class="brand">JO<span>RAB</span></div>
+            <select class="lang-select" id="langSelect">
+                <option value="en">English ▾</option>
+                <option value="sw">Swahili ▾</option>
+            </select>
+        </header>
+
+        <!-- TABS -->
+        <nav>
+            <a href="index.html" class="trans" data-en="Home" data-sw="Nyumbani">Home</a>
+            <a href="lessons.html" class="trans" data-en="Lessons" data-sw="Masomo">Lessons</a>
+            <a href="audio.html" class="trans" data-en="Audio" data-sw="Sauti">Audio</a>
+            <a href="videos.html" class="active trans" data-en="Videos" data-sw="Video">Videos</a>
+            <a href="inspiration.html" class="trans" data-en="Inspiration" data-sw="Ushawishi">Inspiration</a>
+            <a href="about.html" class="trans" data-en="About" data-sw="Kuhusu">About</a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <div class="page-title"><span class="trans" data-en="Video" data-sw="Maktaba ya">Video</span> <span>Library</span></div>
+
+        <!-- 1. SHORTS (GIFS) -->
+        <section>
+            <div class="category-header">
+                <div class="category-title">⚡ <span class="trans" data-en="Shorts (GIFs)" data-sw="Video Fupi (GIFs)">Shorts (GIFs)</span></div>
+            </div>
+            
+            <div class="glass-frame">
+                <div class="arrow-btn arrow-left" onclick="document.getElementById('shorts-rail').scrollBy({left: -220, behavior: 'smooth'})">‹</div>
+                
+                <div class="video-rail shorts-rail" id="shorts-rail">
+                    <!-- GIF ITEM 1 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">GIF</span>
+                            <img src="assets/gifs/short1.gif" alt="Animated Short 1">
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">Animated Loop #1</div>
+                            <div class="video-btn-group">
+                                <a href="assets/gifs/short1.gif" target="_blank" class="btn-action btn-watch">View</a>
+                                <a href="assets/gifs/short1.gif" download class="btn-action btn-download">Get</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GIF ITEM 2 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">GIF</span>
+                            <img src="assets/gifs/short2.gif" alt="Animated Short 2">
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">Animated Loop #2</div>
+                            <div class="video-btn-group">
+                                <a href="assets/gifs/short2.gif" target="_blank" class="btn-action btn-watch">View</a>
+                                <a href="assets/gifs/short2.gif" download class="btn-action btn-download">Get</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GIF ITEM 3 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">GIF</span>
+                            <img src="assets/gifs/short3.gif" alt="Animated Short 3">
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">Animated Loop #3</div>
+                            <div class="video-btn-group">
+                                <a href="assets/gifs/short3.gif" target="_blank" class="btn-action btn-watch">View</a>
+                                <a href="assets/gifs/short3.gif" download class="btn-action btn-download">Get</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow-btn arrow-right" onclick="document.getElementById('shorts-rail').scrollBy({left: 220, behavior: 'smooth'})">›</div>
+                
+                <div class="frame-footer">
+                    <a href="#" class="more-link">more ➔</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ANIMATED VIDEOS -->
+        <section>
+            <div class="category-header">
+                <div class="category-title">🎨 <span class="trans" data-en="Animated Videos" data-sw="Video za Katuni">Animated Videos</span></div>
+            </div>
+
+            <div class="glass-frame">
+                <div class="arrow-btn arrow-left" onclick="document.getElementById('animated-rail').scrollBy({left: -260, behavior: 'smooth'})">‹</div>
+
+                <div class="video-rail" id="animated-rail">
+                    <!-- ANIMATED VIDEO 1 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">ANIMATED</span>
+                            <video autoplay loop muted playsinline poster="assets/videos/thumb1.jpg">
+                                <source src="assets/videos/animation1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">2D Animation Lesson</div>
+                            <div class="video-btn-group">
+                                <a href="assets/videos/animation1.mp4" target="_blank" class="btn-action btn-watch">Watch</a>
+                                <a href="assets/videos/animation1.mp4" download class="btn-action btn-download">Get</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ANIMATED VIDEO 2 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">ANIMATED</span>
+                            <video autoplay loop muted playsinline poster="assets/videos/thumb2.jpg">
+                                <source src="assets/videos/animation2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">3D Motion Graphics</div>
+                            <div class="video-btn-group">
+                                <a href="assets/videos/animation2.mp4" target="_blank" class="btn-action btn-watch">Watch</a>
+                                <a href="assets/videos/animation2.mp4" download class="btn-action btn-download">Get</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow-btn arrow-right" onclick="document.getElementById('animated-rail').scrollBy({left: 260, behavior: 'smooth'})">›</div>
+
+                <div class="frame-footer">
+                    <a href="#" class="more-link">more ➔</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. YOUTUBE VIDEOS (WORKING EMBEDS) -->
+        <section>
+            <div class="category-header">
+                <div class="category-title">▶️ <span class="trans" data-en="YouTube Videos" data-sw="Video za YouTube">YouTube Videos</span></div>
+            </div>
+
+            <div class="glass-frame">
+                <div class="arrow-btn arrow-left" onclick="document.getElementById('youtube-rail').scrollBy({left: -260, behavior: 'smooth'})">‹</div>
+
+                <div class="video-rail" id="youtube-rail">
+                    <!-- YOUTUBE VIDEO 1 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">YOUTUBE</span>
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">YouTube Teaching #1</div>
+                            <div class="video-btn-group">
+                                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-action btn-watch">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOUTUBE VIDEO 2 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">YOUTUBE</span>
+                            <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">YouTube Teaching #2</div>
+                            <div class="video-btn-group">
+                                <a href="https://www.youtube.com/watch?v=3JZ_D3ELwOQ" target="_blank" class="btn-action btn-watch">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow-btn arrow-right" onclick="document.getElementById('youtube-rail').scrollBy({left: 260, behavior: 'smooth'})">›</div>
+
+                <div class="frame-footer">
+                    <a href="#" class="more-link">more ➔</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FROM SERVER / NORMAL ONCE -->
+        <section>
+            <div class="category-header">
+                <div class="category-title">📁 <span class="trans" data-en="From Server" data-sw="Kutoka kwenye Server">From Server</span></div>
+            </div>
+
+            <div class="glass-frame">
+                <div class="arrow-btn arrow-left" onclick="document.getElementById('server-rail').scrollBy({left: -260, behavior: 'smooth'})">‹</div>
+
+                <div class="video-rail" id="server-rail">
+                    <!-- SERVER VIDEO 1 -->
+                    <div class="video-card">
+                        <div class="thumb-box">
+                            <span class="type-badge">SERVER</span>
+                            <video controls poster="assets/videos/thumb1.jpg">
+                                <source src="assets/videos/server1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-content">
+                            <div class="video-title">Standard Lecture #1</div>
+                            <div c 
+                                </html>

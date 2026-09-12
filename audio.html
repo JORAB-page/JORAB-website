@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Sauti (Audio)</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-light: #ffffff;
+            --text-sub: #94a3b8;
+            --orange: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.15);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --card-solid: #130f26;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #080612;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                        url('/storage/emulated/0/JORAB html file/image 4.png') center top / cover fixed no-repeat;
+        }
+
+        /* TOP GRADIENT OVERLAY */
+        .top-gradient-wrapper {
+            position: relative;
+            z-index: 30;
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.85) 80%, rgba(0, 0, 0, 0) 100%);
+            padding-bottom: 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: var(--orange);
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* TABS */
+        nav {
+            background: rgba(8, 6, 18, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            scrollbar-width: none;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 1.4rem;
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        nav a.active {
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        /* CONTAINER */
+        .container {
+            padding: 1.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .page-title span {
+            color: var(--orange);
+        }
+
+        .hero-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-top: -1.2rem;
+        }
+
+        /* GLASS FRAME CONTAINER */
+        .glass-frame {
+            position: relative;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        /* AUDIO CARDS */
+        .audio-card {
+            background: var(--card-solid);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .audio-card:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .audio-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .track-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .track-sub {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+        }
+
+        .track-meta {
+            font-size: 0.75rem;
+            color: var(--orange);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--orange);
+            border: 1px solid var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--orange);
+            color: #000;
+            padding: 0.7rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+            width: 85%;
+            max-width: 360px;
+            text-align: center;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* DESKTOP CONSTRAINT */
+        @media screen and (min-width: 768px), screen and (orientation: landscape) {
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #040308;
+            }
+
+            .top-gradient-wrapper, .container {
+                width: 40%;
+                min-width: 360px;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP GRADIENT OVERLAY -->
+    <div class="top-gradient-wrapper">
+        <header>
+            <div class="brand">JO<span>RAB</span></div>
+            <select class="lang-select" id="langSelect" onchange="switchLanguage()">
+                <option value="sw" selected>Swahili ▾</option>
+                <option value="en">English ▾</option>
+            </select>
+        </header>
+
+        <!-- TABS -->
+        <nav>
+            <a href="index.html" class="nav-link" data-sw="Mwanzo" data-en="Home">Mwanzo</a>
+            <a href="lessons.html" class="nav-link" data-sw="Masomo" data-en="Lessons">Masomo</a>
+            <a href="audio.html" class="active nav-link" data-sw="Sauti" data-en="Audio">Sauti</a>
+            <a href="videos.html" class="nav-link" data-sw="Video" data-en="Videos">Video</a>
+            <a href="inspiration.html" class="nav-link" data-sw="Hamasa" data-en="Inspiration">Hamasa</a>
+            <a href="about.html" class="nav-link" data-sw="Kuhusu" data-en="About">Kuhusu</a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <div class="page-title" id="heroTitle">Sikiliza na <span>Tafakari</span></div>
+        <div class="hero-subtitle" id="heroSub">Sauti za Asili za JORAB</div>
+
+        <!-- GLASS CONTAINER -->
+        <div class="glass-frame">
+
+            <!-- CARD 1 -->
+            <div class="audio-card" onclick="notifySoon('Audio Bible: Psalms of Peace', 'Biblia ya Sauti: Zaburi za Amani')">
+                <div class="audio-info">
+                    <div class="track-title" data-sw="Biblia ya Sauti: Zaburi za Amani" data-en="Audio Bible: Psalms of Peace">Biblia ya Sauti: Zaburi za Amani</div>
+                    <div class="track-sub" data-sw="Zaburi za kupumzisha na kuleta amani" data-en="Calming Psalms for peace and reflection">Zaburi za kupumzisha na kuleta amani</div>
+                    <div class="track-meta" data-sw="⌛ Inakuja Hivi Karibuni" data-en="⌛ Coming Soon">⌛ Inakuja Hivi Karibuni</div>
+                </div>
+                <div class="play-btn">🎧</div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="audio-card" onclick="notifySoon('Walking in the Spirit', 'Kutembea Katika Roho')">
+                <div class="audio-info">
+                    <div class="track-title" data-sw="Kutembea Katika Roho" data-en="Walking in the Spirit">Kutembea Katika Roho</div>
+                    <div class="track-sub" data-sw="Masomo ya ukuaji wa kiroho" data-en="Lessons on spiritual growth">Masomo ya ukuaji wa kiroho</div>
+                    <div class="track-meta" data-sw="⌛ Inatengenezwa" data-en="⌛ In Production">⌛ Inatengenezwa</div>
+                </div>
+                <div class="play-btn">🎧</div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="audio-card" onclick="notifySoon('Morning Devotional & Prayer', 'Ibadah na Maombi ya Asubuhi')">
+                <div class="audio-info">
+                    <div class="track-title" data-sw="Ibadah na Maombi ya Asubuhi" data-en="Morning Devotional & Prayer">Ibadah na Maombi ya Asubuhi</div>
+                    <div class="track-sub" data-sw="Kuanza siku kwa neno la Mungu" data-en="Start your day with God's word">Kuanza siku kwa neno la Mungu</div>
+                    <div class="track-meta" data-sw="⌛ Inakuja Hivi Karibuni" data-en="⌛ Coming Soon">⌛ Inakuja Hivi Karibuni</div>
+                </div>
+                <div class="play-btn">🎧</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast">✨ Sauti za asili za JORAB zinakuja hivi karibuni!</div>
+
+    <script>
+        let currentLang = 'sw';
+
+        function switchLanguage() {
+            const selectedLang = document.getElementById('langSelect').value;
+            currentLang = selectedLang;
+
+            // Update Nav Links
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.textContent = el.getAttribute(`data-${selectedLang}`);
+            });
+
+            // Update Hero Text
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSub = document.getElementById('heroSub');
+
+            if (selectedLang === 'sw') {
+                heroTitle.innerHTML = 'Sikiliza na <span>Tafakari</span>';
+                heroSub.textContent = 'Sauti za Asili za JORAB';
+            } else {
+                heroTitle.innerHTML = 'Listen & <span>Reflect</span>';
+                heroSub.textContent = 'Original JORAB Audio Sessions';
+            }
+
+            // Update Track Content & Badges
+            document.querySelectorAll('[data-sw]').forEach(el => {
+                if (el.classList.contains('nav-link')) return;
+                el.textContent = el.getAttribute(`data-${selectedLang}`);
+            });
+        }
+
+        function notifySoon(titleEn, titleSw) {
+            const toast = document.getElementById('toast');
+            const title = currentLang === 'sw' ? titleSw : titleEn;
+
+            if (currentLang === 'sw') {
+                toast.textContent = `✨ "${title}" ipo kwenye maandalizi!`;
+            } else {
+                toast.textContent = `✨ "${title}" is currently in production!`;
+            }
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

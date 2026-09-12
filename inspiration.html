@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Inspiration</title>
+    <style>
+        :root {
+            --bg-dark: #0b0817;
+            --bg-card: #140f26;
+            --text-light: #ffffff;
+            --text-sub: #9ca3af;
+            --orange: #f59e0b;
+            --cool-blue: #3b82f6;
+            --card-border: rgba(255, 255, 255, 0.1);
+            
+            /* EDIT YOUR BACKGROUND HERE (Image URL or Gradient) */
+            --custom-bg: 
+                        url('/storage/emulated/0/JORAB html file/image 5.png'); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background: var(--custom-bg) center top / cover fixed no-repeat;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 3rem;
+        }
+
+        header {
+            background-color: rgba(11, 8, 23, 0.95);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .brand span {
+            color: var(--orange);
+        }
+
+        .lang-select {
+            background: #1c1538;
+            color: var(--text-light);
+            border: 1px solid var(--card-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* EXACT NAVIGATION MATCHING SCREENSHOT */
+        nav {
+            background: #0b0817;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0.8rem 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            scrollbar-width: none;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-right: 1.8rem;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        nav a.active {
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        .hero {
+            padding: 2.5rem 1.2rem 1.5rem 1.2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span { color: var(--orange); }
+
+        .hero p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 1.5rem auto;
+            padding: 0 1.2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* QUOTE BOXES & SCROLL ANIMATION ZONE */
+        .quote-box {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            /* Focus Zoom Animation */
+            transform: scale(0.92);
+            opacity: 0.5;
+            transition: transform 0.4s ease, opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        /* Active Focus Zone (Triggered via Scroll) */
+        .quote-box.active-zone {
+            transform: scale(1.03);
+            opacity: 1;
+            border-color: var(--orange);
+            box-shadow: 0 12px 32px rgba(245, 158, 11, 0.2);
+        }
+
+        .quote-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #f3f4f6;
+            margin-bottom: 1rem;
+        }
+
+        .verse-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--cool-blue);
+            padding: 0.8rem 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .verse-text {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #d1d5db;
+            line-height: 1.4;
+            margin-bottom: 0.3rem;
+        }
+
+        .verse-ref {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--cool-blue);
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">JO<span>RAB</span></div>
+        <select class="lang-select" id="langSelect" onchange="switchLanguage()">
+            <option value="en">English</option>
+            <option value="sw">Swahili</option>
+        </select>
+    </header>
+
+    <!-- NAVBAR MATCHING EXACT SCREENSHOT ARRANGEMENT -->
+    <nav>
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="bible.html" class="nav-item">Bible</a>
+        <a href="audio.html" class="nav-item">Audio</a>
+        <a href="videos.html" class="nav-item">Videos</a>
+        <a href="inspiration.html" class="active nav-item">Inspiration</a>
+        <a href="about.html" class="nav-item">About</a>
+    </nav>
+
+    <div class="hero">
+        <h1 id="heroTitle">To Strengthen <span>Your Faith</span></h1>
+        <p id="heroSub">Daily inspiration, quotes, and verses to guide your spiritual journey.</p>
+    </div>
+
+    <div class="container" id="cardsContainer">
+        <!-- Quote Boxes populated via JavaScript -->
+    </div>
+
+    <script>
+        const content = {
+            en: {
+                nav: ["Home", "Bible", "Audio", "Videos", "Inspiration", "About"],
+                heroTitle: 'To Strengthen <span>Your Faith</span>',
+                heroSub: "Daily inspiration, quotes, and verses to guide your spiritual journey.",
+                items: [
+                    {
+                        category: "Trust & Direction",
+                        quote: "Faith is trusting God even when you don't understand His plan.",
+                        verse: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight.",
+                        ref: "Proverbs 3:5-6"
+                    },
+                    {
+                        category: "Overcoming Anxiety",
+                        quote: "Worrying doesn't take away tomorrow's trouble, it takes away today's peace.",
+                        verse: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
+                        ref: "Philippians 4:6"
+                    },
+                    {
+                        category: "Inner Courage",
+                        quote: "Courage isn't the absence of fear; it's believing God is stronger than what you face.",
+                        verse: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
+                        ref: "Joshua 1:9"
+                    },
+                    {
+                        category: "Strength in Weakness",
+                        quote: "When you feel like you have nothing left, remember God’s strength begins where yours ends.",
+                        verse: "My grace is sufficient for you, for my power is made perfect in weakness.",
+                        ref: "2 Corinthians 12:9"
+                    },
+                    {
+                        category: "Unshakable Hope",
+                        quote: "Hope is the anchor of the soul that holds firm through every storm.",
+                        verse: "We have this hope as an anchor for the soul, firm and secure.",
+                        ref: "Hebrews 6:19"
+                    },
+                    {
+                        category: "Divine Presence",
+                        quote: "You are never alone; the Creator of the universe walks beside you.",
+                        verse: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you.",
+                        ref: "Isaiah 41:10"
+                    },
+                    {
+                        category: "Peace of Heart",
+                        quote: "Real peace is not found in the absence of problems, but in the presence of God.",
+                        verse: "Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.",
+                        ref: "John 14:27"
+                    },
+                    {
+                        category: "Endurance & Patience",
+                        quote: "God’s timing is never early and never late; it is always perfect.",
+                        verse: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary.",
+                        ref: "Isaiah 40:31"
+                    }
+                ]
+            },
+            sw: {
+                nav: ["Nyumbani", "Biblia", "Sauti", "Video", "Hamasa", "Kuhusu"],
+                heroTitle: 'Kutia Nguvu <span>Imani Yako</span>',
+                heroSub: "Hamasa ya kila siku, nukuu, na aya za kukuongoza katika safari yako ya kiroho.",
+                items: [
+                    {
+                        category: "Imani na Mwelekeo",
+                        quote: "Imani ni kumtumaini Mungu hata wakati huelewi mpango Wake.",
+                        verse: "Mtumaini Bwana kwa moyo wako wote, wala usizitegemee akili zako mwenyewe; katika njia sazo zote mkiri Yeye, Naye atayanyosha mapito yako.",
+                        ref: "Mithali 3:5-6"
+                    },
+                    {
+                        category: "Kushinda Wasiwasi",
+                        quote: "Wasiwasi hauondoi shida za kesho, bali huondoa amani ya leo.",
+                        verse: "Msijisumbue kwa neno lo lote; bali katika kila neno kwa kusali na kuomba, pamoja na kushukuru, haja zenu na zijulikane na Mungu.",
+                        ref: "Wafilipi 4:6"
+                    },
+                    {
+                        category: "Ujasiri wa Ndani",
+                        quote: "Ujasiri si kutokuwa na hofu; ni kuamini Mungu ni mkuu kuliko unachokabili.",
+                        verse: "Je! Si mimi niliyekuamuru? Uwe hodari na moyo wa ushujaa; usiogope wala usifadhaike; kwa kuwa Bwana, Mungu wako, yu pamoja nawe kila uendako.",
+                        ref: "Yoshua 1:9"
+                    },
+                    {
+                        category: "Nguvu Katika Udhaifu",
+                        quote: "Unapohisi huwezi tena, kumbuka nguvu za Mungu huanzia pale zako zinapoishia.",
+                        verse: "Neema yangu yakutosha; maana uwezo wangu hutimilika katika udhaifu.",
+                        ref: "2 Wakorintho 12:9"
+                    },
+                    {
+                        category: "Tumaini Isiyotikisika",
+                        quote: "Tumaini ni nanga ya nafsi inayoshikilia vyema katikati ya kila dhoruba.",
+                        verse: "Tuna tumaini hili kama nanga ya nafsi, yenye nguvu na salama.",
+                        ref: "Waebrania 6:19"
+                    },
+                    {
+                        category: "Uwepo wa Mungu",
+                        quote: "Huko peke yako kabisa; Muumba wa ulimwengu anatembea pamoja nawe.",
+                        verse: "Usiogope, kwa maana mimi ni pamoja nawe; usifadhaike, kwa maana mimi ni Mungu wako; nitakutia nguvu, naam, nitakusaidia.",
+                        ref: "Isaya 41:10"
+                    },
+                    {
+                        category: "Amani ya Moyo",
+                        quote: "Amani ya kweli haipatikani kwa kukosa matatizo, bali kwa kuwa na uwepo wa Mungu.",
+                        verse: "Amani naacha kwenu, amani yangu nawapa; mimi niwapavyo sivyo atawavyo ulimwengu. Mioyo yenu isifadhaike wala isiwe na woga.",
+                        ref: "Yohana 14:27"
+                    },
+                    {
+                        category: "Uvumilivu na Subira",
+                        quote: "Wakati wa Mungu hauwahi wala hauchelewi; mara zote ni kamilifu.",
+                        verse: "Bali wao wamngojeao Bwana watapata nguvu mpya; watapanda juu kwa mabawa kama tai; watapiga mbio wala mekachoka.",
+                        ref: "Isaya 40:31"
+                    }
+                ]
+            }
+        };
+
+        function switchLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const data = content[lang];
+
+            // Header & Hero text updates
+            document.getElementById('heroTitle').innerHTML = data.heroTitle;
+            document.getElementById('heroSub').textContent = data.heroSub;
+
+            // Nav links text updates
+            const navLinks = document.querySelectorAll('.nav-item');
+            navLinks.forEach((link, idx) => {
+                if (data.nav[idx]) link.textContent = data.nav[idx];
+            });
+
+            // Build Quote Boxes
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+
+            data.items.forEach(item => {
+                const boxHTML = `
+                    <div class="quote-box">
+                        <div class="quote-title">${item.category}</div>
+                        <div class="quote-text">"${item.quote}"</div>
+                        <div class="verse-box">
+                            <div class="verse-text">"${item.verse}"</div>
+                            <div class="verse-ref">— ${item.ref}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += boxHTML;
+            });
+
+            // Re-initialize Scroll Zone Animations
+            initScrollObserver();
+        }
+
+        // SCROLL ZONE ANIMATION (IntersectionObserver)
+        function initScrollObserver() {
+            const boxes = document.querySelectorAll('.quote-box');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-35% 0px -35% 0px', // Center focus zone
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active-zone');
+                    } else {
+                        entry.target.classList.remove('active-zone');
+                    }
+                });
+            }, observerOptions);
+
+            boxes.forEach(box => observer.observe(box));
+        }
+
+        // Initialize on load
+        window.onload = switchLanguage;
+    </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-light: #ffffff;
+            --text-sub: #94a3b8;
+            --orange: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #08061
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* FIXED: Ensure quotes are properly formatted and fallback color is set */
+            background-image:
+                              url("/storage/emulated/0/JORAB html file/imag 2.1.png");
+            background-position: center top ;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* GRADIENT FROM TOP TO 20px BELOW TABS */
+        .top-gradient-wrapper {
+            position: relative;
+            z-index: 30;
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.85) 80%, rgba(0, 0, 0, 0) 100%);
+            padding-bottom: 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: var(--orange);
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* 90% TRANSPARENT TABS */
+        nav {
+            background: rgba(8, 6, 18, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            scrollbar-width: none;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 1.4rem;
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        nav a.active {
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        /* CONTAINER */
+        .container {
+            padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .hero-title-box {
+            min-height: 85px;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.15;
+            color: var(--text-light);
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-title span {
+            color: var(--orange);
+            display: block;
+        }
+
+        .hero-sub {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            font-weight: 500;
+            margin-top: 0.4rem;
+            transition: opacity 0.5s ease;
+        }
+
+        /* BUTTONS */
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .btn-pill {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-pill:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            border: none;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* YOUTUBE HORIZONTAL RAIL */
+        .youtube-section {
+            margin-top: 1rem;
+        }
+
+        .video-rail {
+            display: flex;
+            gap: 0.85rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+        }
+
+        .video-rail::-webkit-scrollbar {
+            display: none;
+        }
+
+        .yt-card {
+            width: 150px;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .yt-thumb {
+            position: relative;
+            width: 100%;
+            height: 95px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #100c22;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .yt-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .yt-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.58rem;
+            font-weight: 700;
+        }
+
+        .yt-badge span {
+            color: #ff0000;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            background: #ff0000;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .yt-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 0.4rem;
+            line-height: 1.25;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* UNBOXED QUOTES */
+        .quote-wrapper {
+            margin-top: 1rem;
+            text-align: left;
+            padding: 0 0.2rem;
+        }
+
+        .quote-text {
+            font-size: 2rem;
+            font-weight: 500000;
+            font-style: comic sans;
+            color: var(--text-sub);
+            line-height: 1.4;
+            min-height: 50px;
+            transition: opacity 0.4s ease;
+        }
+
+        /* DESKTOP & LANDSCAPE CONSTRAINT */
+        @media screen and (min-width: 768px), screen and (orientation: potrait) {
+            body {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #040308;
+                background alignment :right;
+            }
+
+            .top-gradient-wrapper, .container {
+                width: 40%;
+                min-width: 360px;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP GRADIENT OVERLAY -->
+    <div class="top-gradient-wrapper">
+        <header>
+            <div class="brand">JO<span>RAB</span></div>
+            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="en">English ▾</option>
+                <option value="sw">Swahili ▾</option>
+            </select>
+        </header>
+
+        <!-- NAVIGATION TABS -->
+        <nav>
+            <a href="index.html" class="active" data-en="Home" data-sw="Nyumbani">Home</a>
+            <a href="explore.html" data-en="  " data-sw="  "> </a>
+            <a href="lessons.html" data-en="Lessons" data-sw="Masomo">Lessons</a>
+            <a href="audio.html" data-en="Audio" data-sw="Sauti">Audio</a>
+            <a href="videos.html" data-en="Videos" data-sw="Video">Videos</a>
+            <a href="inspiration.html" data-en="Inspiration" data-sw="Ushawishi">Inspiration</a>
+            <a href="about.html" data-en="About" data-sw="Kuhusu">About</a>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <!-- HERO SECTION -->
+        <div class="hero-section">
+            <div class="hero-title-box">
+                <div class="hero-title" id="heroTitle">
+                    Discover the Word.
+                    <span id="heroSpan">Live the Word.</span>
+                </div>
+            </div>
+            
+            <div class="hero-sub" id="heroSub">
+                Explore Scripture, stories, wisdom and inspiration.
+            </div>
+
+            <!-- FIXED BUTTON LINKS POINTING TO explore.html -->
+            <div class="hero-buttons">
+                <a href="lessons.html" class="btn-pill btn-primary">
+                    📖 <span data-en="EXPLORE WORD" data-sw="GUNDUA NENO">EXPLORE WORD</span>
+                </a>
+                <a href="explore.html" class="btn-pill btn-secondary">
+                    ▶ <span data-en="START EXPLORING" data-sw="ANZA KUGUNDUA">START EXPLORING</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- YOUTUBE HORIZONTAL RAIL -->
+        <div class="youtube-section">
+            <div class="video-rail" id="ytRail"></div>
+        </div>
+
+        <!-- UNBOXED QUOTES CAROUSEL -->
+        <div class="quote-wrapper">
+            <div class="quote-text" id="quoteText">
+                "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight."
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const heroSlides = [
+            {
+                line1En: 'Discover the Word.',
+                line2En: 'Live the Word.',
+                line1Sw: 'Gundua Neno.',
+                line2Sw: 'Ishi Neno.',
+                subEn: 'Explore Scripture, stories, wisdom and inspiration.',
+                subSw: 'Gundua Maandiko, hadithi, hekima na ushawishi.'
+            },
+            {
+                line1En: 'Start Your Journey.',
+                line2En: 'Walk in Grace.',
+                line1Sw: 'Anza Safari Yako.',
+                line2Sw: 'Tembea katika Neema.',
+                subEn: 'Deepen your faith with guided lessons and videos.',
+                subSw: 'Kuza imani yako kwa masomo na video za kuongoza.'
+            }
+        ];
+
+        const quotes = [
+            { en: '"Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight."', sw: '"Mtumaini Bwana kwa moyo wako wote, wala usizitegemee akili zako mwenyewe; katika njia zako zote mkurubie Yeye, Naye atayanyosha mapito yako."' },
+            { en: '"Thy word is a lamp unto my feet, and a light unto my path."', sw: '"Neno lakino ni taa ya miguu yangu, na mwanga wa njia yangu."' },
+            { en: '"I can do all things through Christ who strengthens me."', sw: '"Naweza mambo yote katika Yeye anitiaye nguvu."' },
+            { en: '"The Lord is my shepherd; I shall not want."', sw: '"Bwana ni mchungaji wangu, sitapungukiwa na kitu."' },
+            { en: '"Faith can move mountains."', sw: '"Imani inaweza kuhamisha milima."' },
+            { en: '"Be strong and courageous; do not be afraid."', sw: '"Awe hodari na mjasiri; usiogope."' },
+            { en: '"The peace of God surpasses all understanding."', sw: '"Amani ya Mungu inapita fahamu zote."' },
+            { en: '"Love is patient, love is kind."', sw: '"Upendo uvumilia, upendo una fadhili."' },
+            { en: '"The Lord is good, a refuge in times of trouble."', sw: '"Bwana ni mwema, ni ngome siku ya taabu."' },
+            { en: '"Walk by faith, not by sight."', sw: '"Enea kwa imani, si kwa kuona."' }
+        ];
+
+        const ytLinks = [
+            { id: "CRDWTkvn38k", titleEn: "Spirit vs Soul Explained", titleSw: "Roho dhidi ya Nafsi Imefafanuliwa" },
+            { id: "iqeCozDN0bo", titleEn: "Who Is The Holy Spirit?", titleSw: "Roho Mtakatifu Ni Nani?" },
+            { id: "rAq6qVGEqvk", titleEn: "How to Be Spirit Led", titleSw: "Jinsi ya Kuongozwa na Roho" },
+            { id: "Pr0k7GzWs_c", titleEn: "Understanding Scripture", titleSw: "Kuelewa Maandiko Matakatifu" },
+            { id: "gXDMoiEkyuQ", titleEn: "The Power of Faith", titleSw: "Nguvu ya Imani" }
+        ];
+
+        let currentLang = 'en';
+        let heroIndex = 0;
+        let quoteIndex = 0;
+
+        function renderYoutubeCards() {
+            const rail = document.getElementById('ytRail');
+            rail.innerHTML = '';
+            ytLinks.forEach((item, idx) => {
+                const card = document.createElement('a');
+                card.href = `https://www.youtube.com/watch?v=${item.id}`;
+                card.target = '_blank';
+                card.className = 'yt-card';
+                card.innerHTML = `
+                    <div class="yt-thumb">
+                        <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="Video ${idx+1}">
+                        <div class="yt-badge"><span>▶</span> YouTube</div>
+                        <div class="play-btn">▶</div>
+                    </div>
+                    <div class="yt-title">${currentLang === 'sw' ? item.titleSw : item.titleEn}</div>
+                `;
+                rail.appendChild(card);
+            });
+        }
+
+        setInterval(() => {
+            heroIndex = (heroIndex + 1) % heroSlides.length;
+            const titleEl = document.getElementById('heroTitle');
+            const subEl = document.getElementById('heroSub');
+
+            titleEl.style.opacity = '0';
+            subEl.style.opacity = '0';
+
+            setTimeout(() => {
+                const slide = heroSlides[heroIndex];
+                const l1 = currentLang === 'sw' ? slide.line1Sw : slide.line1En;
+                const l2 = currentLang === 'sw' ? slide.line2Sw : slide.line2En;
+                titleEl.innerHTML = `${l1} <span>${l2}</span>`;
+                subEl.textContent = currentLang === 'sw' ? slide.subSw : slide.subEn;
+                
+                titleEl.style.opacity = '1';
+                subEl.style.opacity = '1';
+            }, 500);
+        }, 5000);
+
+        setInterval(() => {
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+            const quoteEl = document.getElementById('quoteText');
+            quoteEl.style.opacity = '0';
+
+            setTimeout(() => {
+                quoteEl.textContent = currentLang === 'sw' ? quotes[quoteIndex].sw : quotes[quoteIndex].en;
+                quoteEl.style.opacity = '1';
+            }, 400);
+        }, 3000);
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+
+            document.querySelectorAll('[data-en][data-sw]').forEach(el => {
+                el.textContent = lang === 'sw' ? el.getAttribute('data-sw') : el.getAttribute('data-en');
+            });
+
+            const slide = heroSlides[heroIndex];
+            const l1 = lang === 'sw' ? slide.line1Sw : slide.line1En;
+            const l2 = lang === 'sw' ? slide.line2Sw : slide.line2En;
+            document.getElementById('heroTitle').innerHTML = `${l1} <span>${l2}</span>`;
+            document.getElementById('heroSub').textContent = lang === 'sw' ? slide.subSw : slide.subEn;
+
+            document.getElementById('quoteText').textContent = lang === 'sw' ? quotes[quoteIndex].sw : quotes[quoteIndex].en;
+            renderYoutubeCards();
+        }
+
+        renderYoutubeCards();
+    </script>
+</body>
+</html>

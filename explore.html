@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Home</title>
+    <style>
+        :root {
+            --nav-bg: #091322;
+            --gold: #f5a623;
+            --light-bg: #0b0f17;
+            --card-bg: #131b2e;
+            --text-dark: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            background:
+                        url('image 3.png') center top / cover fixed no-repeat;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation (Explore Removed) */
+        header {
+            background-color: var(--nav-bg);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* MAXIMUM FONT SIZE & STRONG EMPHASIS FOR QUOTES */
+        .quote-fly-container {
+            position: relative;
+            width: 100%;
+            min-height: 170px;
+            background: transparent;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .quote-fly-text {
+            position: absolute;
+            width: auto;
+            max-width: 90%;
+            text-align: center;
+            line-height: 1.35;
+            color: blue(255, 255, 255, 0.1);
+            
+            /* Maximized typography & glowing emphasis */
+            font-size: 2.6rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 0.8px;
+            text-shadow: 0 0 400px rgba(245, 166, 35, 0.6), 0 4px 15px rgba(0, 0, 0, 0.95);
+            
+            /* Flying animation loop */
+            animation: flyPauseFlyRight 6.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes flyPauseFlyRight {
+            0% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+            12% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            88% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container & Media Rails */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1.2rem;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rail-wrapper {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.8rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) var(--card-bg);
+        }
+
+        .rail-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .rail-wrapper::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .media-card {
+            min-width: 200px;
+            max-width: 200px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .media-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .media-card h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+        }
+
+        .media-card p {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-bottom: 0.8rem;
+        }
+
+        .media-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .media-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Fixed AI Bar */
+        .ai-fixed-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0f172a;
+            border-top: 2px solid var(--gold);
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+        }
+
+        .ai-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ai-text h5 {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .ai-text p {
+            color: var(--text-sub);
+            font-size: 0.75rem;
+        }
+
+        .ai-input-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .ai-input {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .ai-send-btn {
+            background: var(--gold);
+            border: none;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 680px) {
+            header { flex-wrap: wrap; gap: 0.8rem; }
+            nav { width: 100%; overflow-x: auto; }
+            .quote-fly-text { font-size: 1.7rem; max-width: 95vw; }
+            .ai-text p { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation (Explore Tab Removed) -->
+    <header>
+        <div class="brand-container">
+            <div class="brand">JORAB</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active" id="tab-home">Home</a></li>
+                <li><a href="lessons.html" id="tab-lessons>lessons</a></li>
+                <li><a href="audio.html" id="tab-audio">Audio</a></li>
+            </ul>
+        </nav>
+        <select class="lang-select" id="langSelect" onchange="setLanguage(this.value)">
+            <option value="en">English &#x25BC;</option>
+            <option value="sw">Kiswahili &#x25BC;</option>
+        </select>
+    </header>
+
+    <!-- MAXIMIZED EMPHASIZED FLYING QUOTES -->
+    <div class="quote-fly-container">
+        <span class="quote-fly-text" id="flyQuote">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16</span>
+    </div>
+
+    <div class="container">
+
+        <!-- VIDEO RAIL -->
+        <h3 class="section-title">🎬 <span id="title-videos">Video Series</span></h3>
+        <div class="rail-wrapper">
+            <div class="media-card">
+                <div class="media-icon">📹</div>
+                <h4>Creation Story</h4>
+                <p>Visual narrative of Genesis 1.</p>
+                <a href="#" class="media-btn">WATCH</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">📹</div>
+                <h4>Life of Jesus</h4>
+                <p>The Gospels brought to life.</p>
+                <a href="#" class="media-btn">WATCH</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">📹</div>
+                <h4>Parables Explained</h4>
+                <p>Deeper meaning behind stories.</p>
+                <a href="#" class="media-btn">WATCH</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">📹</div>
+                <h4>Acts of Apostles</h4>
+                <p>The early church journey.</p>
+                <a href="#" class="media-btn">WATCH</a>
+            </div>
+        </div>
+
+        <!-- AUDIO RAIL -->
+        <h3 class="section-title">🎧 <span id="title-audio">Audio Lessons & Psalms</span></h3>
+        <div class="rail-wrapper">
+            <div class="media-card">
+                <div class="media-icon">🎵</div>
+                <h4>Psalms of Peace</h4>
+                <p>Soothing audio recitation.</p>
+                <a href="#" class="media-btn">LISTEN</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">🎙️</div>
+                <h4>Daily Wisdom</h4>
+                <p>5-minute morning reflection.</p>
+                <a href="#" class="media-btn">LISTEN</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">🎵</div>
+                <h4>Proverbs Audio</h4>
+                <p>Complete chapter readings.</p>
+                <a href="#" class="media-btn">LISTEN</a>
+            </div>
+        </div>
+
+        <!-- PDF DOCUMENTS RAIL -->
+        <h3 class="section-title">📄 <span id="title-pdf">PDF Study Guides</span></h3>
+        <div class="rail-wrapper">
+            <div class="media-card">
+                <div class="media-icon">📑</div>
+                <h4>Bible Study Plan</h4>
+                <p>365-day reading chart (PDF).</p>
+                <a href="#" class="media-btn">DOWNLOAD</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">📚</div>
+                <h4>Old Testament Map</h4>
+                <p>High-resolution timeline guide.</p>
+                <a href="#" class="media-btn">DOWNLOAD</a>
+            </div>
+            <div class="media-card">
+                <div class="media-icon">📝</div>
+                <h4>Faith Foundations</h4>
+                <p>Beginner study workbook.</p>
+                <a href="#" class="media-btn">DOWNLOAD</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- STICKY BOTTOM BAR -->
+    <div class="ai-fixed-bar">
+        <div class="ai-info">
+            <div class="ai-text">
+                <h5>JORAB Assistant</h5>
+                <p id="aiDesc">please ask any questions</p>
+            </div>
+        </div>
+        <div class="ai-input-group">
+            <input type="text" class="ai-input" id="aiInput" placeholder="Ask a question..." />
+            <button class="ai-send-btn" onclick="askAI()">ASK</button>
+        </div>
+    </div>
+
+    <script>
+        const quotes = {
+            en: [
+                '"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16',
+                '"The Lord is my shepherd; I shall not want. He makes me lie down in green pastures." — Psalm 23:1-2',
+                '"Trust in the Lord with all your heart, and do not lean on your own understanding." — Proverbs 3:5',
+                '"I can do all things through him who strengthens me." — Philippians 4:13',
+                '"Be strong and courageous. Do not be frightened, for the Lord your God is with you." — Joshua 1:9'
+            ],
+            sw: [
+                '"Kwa maana jinsi hii Mungu aliupenda ulimwengu, hata akamtoa Mwanawe pekee, ili kila mtu amwaminiye asipotee, bali awe na uzima wa milele." — Yohana 3:16',
+                '"Bwana ni mchungaji wangu, sitapungukiwa na kitu. Katika malisho ya majani mabichi hunilaza." — Zaburi 23:1-2',
+                '"Mtumaini Bwana kwa moyo wako wote, wala usizitegemee akili zako mwenyewe." — Mithali 3:5',
+                '"Nayaweza mambo yote katika yeye anitiaye nguvu." — Wafilipi 4:13',
+                '"Uwe hodari na moyo wa ushujaa; usiogope, kwa kuwa Bwana Mungu wako yu pamoja nawe." — Yoshua 1:9'
+            ]
+        };
+
+        let currentLang = 'en';
+        let quoteIndex = 0;
+
+        // Rotate Quotes every 6.8 seconds
+        setInterval(() => {
+            quoteIndex = (quoteIndex + 1) % quotes[currentLang].length;
+            const quoteEl = document.getElementById('flyQuote');
+            
+            quoteEl.style.animation = 'none';
+            quoteEl.offsetHeight; /* Trigger Reflow */
+            quoteEl.style.animation = 'flyPauseFlyRight 6.6s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+            
+            quoteEl.innerText = quotes[currentLang][quoteIndex];
+        }, 6800);
+
+        const translations = {
+            en: {
+                tabHome: "Home", tabBible: "Bible", tabAudio: "Audio", tabLearn: "Learn",
+                titleVideos: "Video Series",
+                titleAudio: "Audio Lessons & Psalms",
+                titlePdf: "PDF Study Guides",
+                aiDesc: "please ask any questions",
+                aiHolder: "Ask a question..."
+            },
+            sw: {
+                tabHome: "Mwanzo", tabBible: "Biblia", tabAudio: "Sauti", tabLearn: "Jifunze",
+                titleVideos: "Mfululizo wa Video",
+                titleAudio: "Masomo ya Sauti na Zaburi",
+                titlePdf: "Mwongozo wa Masomo (PDF)",
+                aiDesc: "tafadhali uliza maswali yoyote",
+                aiHolder: "Uliza swali..."
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            document.getElementById('tab-home').innerText = t.tabHome;
+            document.getElementById('tab-bible').innerText = t.tabBible;
+            document.getElementById('tab-audio').innerText = t.tabAudio;
+            document.getElementById('tab-learn').innerText = t.tabLearn;
+
+            document.getElementById('title-videos').innerText = t.titleVideos;
+            document.getElementById('title-audio').innerText = t.titleAudio;
+            document.getElementById('title-pdf').innerText = t.titlePdf;
+
+            document.getElementById('aiDesc').innerText = t.aiDesc;
+            document.getElementById('aiInput').placeholder = t.aiHolder;
+            document.getElementById('flyQuote').innerText = quotes[lang][0];
+        }
+
+        function askAI() {
+            const val = document.getElementById('aiInput').value;
+            if(val.trim() !== "") {
+                alert("JORAB Assistant: Processing your question - '" + val + "'");
+                document.getElementById('aiInput').value = "";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JORAB - Lessons</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-light: #ffffff;
+            --text-sub: #cbd5e1;
+            --orange: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* PLAIN UNFILTERED BACKGROUND IMAGE */
+            background-image: url('/storage/emulated/0/JORAB html file/image 1.png');
+            background-position: center top;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* HEADER */
+        header {
+            padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .brand span {
+            color: var(--orange);
+        }
+
+        .lang-select {
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+
+        /* TRANSPARENT TABS OVERLAY */
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            scrollbar-width: none;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 1.4rem;
+            display: inline-block;
+            transition: color 0.2s ease;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+
+        nav a.active {
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        /* CONTAINER */
+        .container {
+            padding: 1.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .page-header {
+            text-align: left;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        }
+
+        .page-title span {
+            color: var(--orange);
+        }
+
+        .page-desc {
+            font-size: 0.9rem;
+            color: #ffffff;
+            margin-top: 0.3rem;
+            font-weight: 500;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .category-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        /* TRANSPARENT GLASS FRAME */
+        .glass-frame {
+            position: relative;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1rem 0.6rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 5-LESSON HORIZONTAL SCROLL RAIL */
+        .lesson-rail {
+            display: flex;
+            gap: 0.9rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0.2rem;
+            scrollbar-width: none;
+        }
+
+        .lesson-rail::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* PDF LESSON CARD */
+        .pdf-card {
+            width: 220px;
+            flex-shrink: 0;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        /* TOP BOX FOR LESSON TITLE */
+        .pdf-title-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .pdf-tag {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .pdf-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-light);
+            min-height: 2.6rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .pdf-meta {
+            font-size: 0.7rem;
+            color: var(--text-sub);
+            margin-top: 0.5rem;
+        }
+
+        /* TWO BUTTONS AT THE BOTTOM */
+        .pdf-btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.6rem 0.2rem;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+
+        .btn-read {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--orange);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-download {
+            background: var(--orange);
+            color: #000;
+        }
+
+        /* MODAL POPUP FOR ONLINE READING */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-header {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .modal-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .btn-close {
+            background: var(--orange);
+            border: none;
+            color: #000;
+            font-weight: 900;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 1.2rem;
+            flex: 1;
+            overflow-y: auto;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* DESKTOP & LANDSCAPE CONSTRAINT (40% MAXIMUM WIDTH) */
+        @media screen and (min-width: 768px), screen and (orientation: landscape) {
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header, nav, .container {
+                width: 40%;
+                min-width: 360px;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">JO<span>RAB</span></div>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="en">English ▾</option>
+            <option value="sw">Swahili ▾</option>
+        </select>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav>
+        <a href="index.html" data-en="Home" data-sw="Nyumbani">Home</a>
+        <a href="explore.html" data-en="  " data-sw=" "> </a>
+        <a href="lessons.html" class="active" data-en="Lessons" data-sw="Masomo">Lessons</a>
+        <a href="audio.html" data-en="Audio" data-sw="Sauti">Audio</a>
+        <a href="videos.html" data-en="Videos" data-sw="Video">Videos</a>
+        <a href="inspiration.html" data-en="Inspiration" data-sw="Ushawishi">Inspiration</a>
+        <a href="about.html" data-en="About" data-sw="Kuhusu">About</a>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <div class="page-header">
+            <div class="page-title" data-en="PDF <span>Lessons</span>" data-sw="Masomo ya <span>PDF</span>">PDF <span>Lessons</span></div>
+            <div class="page-desc" data-en="Read study documents online or download them directly to your device." data-sw="Soma miongozo ya masomo mtandaoni au pakua kwenye kifaa chako.">Read study documents online or download them directly to your device.</div>
+        </div>
+
+        <!-- SECTION 1: FOUNDATIONAL LESSONS (5 ITEMS) -->
+        <section>
+            <div class="category-title">
+                <span>📚</span> <span data-en="Foundational Teachings" data-sw="Mafundisho ya Msingi">Foundational Teachings</span>
+            </div>
+            
+            <div class="glass-frame">
+                <div class="lesson-rail" id="foundational-rail"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SCRIPTURE STUDIES (5 ITEMS) -->
+        <section>
+            <div class="category-title">
+                <span>📖</span> <span data-en="Scripture Studies" data-sw="Kujifunza Maandiko">Scripture Studies</span>
+            </div>
+
+            <div class="glass-frame">
+                <div class="lesson-rail" id="scripture-rail"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ONLINE READING MODAL -->
+    <div class="modal" id="readModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">PDF Document</div>
+                <button class="btn-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        // 5 FOUNDATIONAL LESSONS
+        const foundationalLessons = [
+            { id: 1, titleEn: "Understanding Grace & Faith", titleSw: "Kuelewa Neema na Imani", file: "grace-and-faith.pdf", pages: "12 Pages • PDF" },
+            { id: 2, titleEn: "The Power of Daily Prayer", titleSw: "Nguvu ya Maombi ya Kila Siku", file: "daily-prayer.pdf", pages: "8 Pages • PDF" },
+            { id: 3, titleEn: "Walking in Divine Wisdom", titleSw: "Kutembea katika Hekima ya Mungu", file: "divine-wisdom.pdf", pages: "15 Pages • PDF" },
+            { id: 4, titleEn: "Foundations of Believers", titleSw: "Msingi wa Waumini", file: "foundations-of-believers.pdf", pages: "20 Pages • PDF" },
+            { id: 5, titleEn: "Overcoming Fear Through Scripture", titleSw: "Kushinda Hofu Kupitia Maandiko", file: "overcoming-fear.pdf", pages: "10 Pages • PDF" }
+        ];
+
+        // 5 SCRIPTURE STUDY LESSONS
+        const scriptureLessons = [
+            { id: 6, titleEn: "Exposition of Romans 8", titleSw: "Ufafanuzi wa Warumi Sura ya 8", file: "romans-chapter-8.pdf", pages: "18 Pages • PDF" },
+            { id: 7, titleEn: "The Sermon on the Mount", titleSw: "Mafundisho ya Mlimani", file: "sermon-on-the-mount.pdf", pages: "14 Pages • PDF" },
+            { id: 8, titleEn: "Daniel & Revelation Prophetic Guide", titleSw: "Mwongozo wa Unabii wa Danieli na Ufunuo", file: "daniel-and-revelation.pdf", pages: "32 Pages • PDF" },
+            { id: 9, titleEn: "The Names of God in Hebrew", titleSw: "Majina ya Mungu katika Kiebrania", file: "names-of-god.pdf", pages: "22 Pages • PDF" },
+            { id: 10, titleEn: "Understanding the Parables", titleSw: "Kuelewa Mifano ya Yesu", file: "understanding-parables.pdf", pages: "16 Pages • PDF" }
+        ];
+
+        // RENDER CARDS TO RAIL
+        function renderSection(railId, lessonList) {
+            const rail = document.getElementById(railId);
+            rail.innerHTML = '';
+
+            lessonList.forEach(item => {
+                const title = currentLang === 'sw' ? item.titleSw : item.titleEn;
+
+                const card = document.createElement('div');
+                card.className = 'pdf-card';
+                card.innerHTML = `
+                    <div class="pdf-title-box">
+                        <span class="pdf-tag">📄 PDF LESSON</span>
+                        <div class="pdf-title" data-en="${item.titleEn}" data-sw="${item.titleSw}">${title}</div>
+                        <div class="pdf-meta">${item.pages}</div>
+                    </div>
+
+                    <div class="pdf-btn-group">
+                        <button class="btn-action btn-read" onclick="readOnline('${item.titleEn}', '${item.titleSw}')" data-en="Read Online" data-sw="Soma Mtandaoni">${currentLang === 'sw' ? 'Soma Mtandaoni' : 'Read Online'}</button>
+                        <a href="${item.file}" download class="btn-action btn-download" data-en="Download" data-sw="Pakua">${currentLang === 'sw' ? 'Pakua' : 'Download'}</a>
+                    </div>
+                `;
+                rail.appendChild(card);
+            });
+        }
+
+        // INITIALIZE THE 5 LESSONS FOR EACH SECTION
+        renderSection('foundational-rail', foundationalLessons);
+        renderSection('scripture-rail', scriptureLessons);
+
+        // READ ONLINE MODAL FUNCTION
+        function readOnline(titleEn, titleSw) {
+            const title = currentLang === 'sw' ? titleSw : titleEn;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = `
+                <h3 style="color: var(--orange); margin-bottom: 0.8rem;">${title}</h3>
+                <p><strong>Overview:</strong> Welcome to this structured spiritual lesson provided by JORAB.</p>
+                <br>
+                <p>This PDF guide provides detailed scripture studies and key takeaways to help deepen your biblical understanding.</p>
+                <br>
+                <p style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--orange);">
+                    <em>Tip: To keep an offline copy saved directly to your device storage, click the <strong>Download / Pakua</strong> button on the lesson card.</em>
+                </p>
+            `;
+            document.getElementById('readModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('readModal').classList.remove('open');
+        }
+
+        // BILINGUAL SWITCHER
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-en][data-sw]').forEach(el => {
+                el.textContent = lang === 'sw' ? el.getAttribute('data-sw') : el.getAttribute('data-en');
+            });
+            renderSection('foundational-rail', foundationalLessons);
+            renderSection('scripture-rail', scriptureLessons);
+        }
+    </script>
+</body>
+</html>
