@@ -1,2 +1,2 @@
 # JORAB-website
-We share the word of God 
+We share the word of God together 
